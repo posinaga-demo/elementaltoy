@@ -8,7 +8,7 @@ spec:
   triggers:
     - name: foo-trig
       bindings:
-        - name: pipeline-binding
-        # - name: message-binding
+        - name: github-binding
+        - name: message-binding
       template:
         name: ephemeral-environment-pipeline-run-template

@@ -59,52 +59,34 @@ kubectl apply -f example-pipeline.yaml
 kubectl get el listener -o=jsonpath='{.status.configuration.generatedName}'
 
 
-cf315a5c9e1f 
-57c
-
-
-
 gcloud beta container node-pools update default-pool \
  --cluster=test1 \
  --workload-metadata-from-node=GKE_METADATA_SERVER \
  --zone=us-east4-a
 
-
-louis-testing-project.svc.id.goog
-
-basictoy.svc.id.goog
-
+gcloud beta container node-pools update default-pool \
+ --cluster=test1 \
+ --workload-metadata-from-node=GKE_METADATA \
+ --zone=us-east4-a
 
 
 gcloud iam service-accounts add-iam-policy-binding \
   --role roles/iam.workloadIdentityUser \
-  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
-  cloudrun-admin@basictoy.iam.gserviceaccount.com
+  --member "serviceAccount:basictoy.svc.id.goog[default/triggers-sa]" \
+  deployer@basictoy.iam.gserviceaccount.com
 
-gcloud iam service-accounts add-iam-policy-binding \
-  --role roles/iam.workloadIdentityUser \
-  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
-  490491327578-compute@developer.gserviceaccount.com
-
-gcloud iam service-accounts add-iam-policy-binding \
-  --role roles/iam.workloadIdentityUser \
-  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
-  cloudrun-orchestration@basictoy.iam.gserviceaccount.com
-
-gcloud iam service-accounts add-iam-policy-binding \
-  --role roles/iam.workloadIdentityUser \
-  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
-  pablo.osinaga@gmail.com
-
-gcloud iam service-accounts add-iam-policy-binding \
-  --role roles/iam.workloadIdentityUser \
-  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
-  service-490491327578@serverless-robot-prod.iam.gserviceaccount.com
-
-
-gcloud iam service-accounts add-iam-policy-binding \
+gcloud iam service-accounts remove-iam-policy-binding \
   --role roles/iam.workloadIdentityUser \
   --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
   deployer@basictoy.iam.gserviceaccount.com
+
+
+gcloud iam service-accounts remove-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:basictoy.svc.id.goog[default/triggers-sa]" \
+  deployer@basictoy.iam.gserviceaccount.com
+
+
+
 
 

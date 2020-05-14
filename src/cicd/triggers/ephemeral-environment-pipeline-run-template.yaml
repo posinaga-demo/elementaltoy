@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: ephemeral-environment-pipeline
+  name: ephemeral-environment-pipeline-run-template
 spec:
   params:
   - name: gitrevision
@@ -20,7 +20,7 @@ spec:
     metadata:
       generateName: ephemeral-environment-pipeline-run-
     spec:
-      serviceAccountName: tekton-triggers-example-sa
+      serviceAccountName: triggers-sa
       pipelineRef:
         name: ephemeral-environment-pipeline
       params:
@@ -42,4 +42,7 @@ spec:
           type: image
           params:
           - name: url
-            value: gcr.io/basictoy/elementaltoy-ephemeral
+            value: gcr.io/basictoy/elementaltoy-ephemeral-frontend
+      workspaces:
+        - name: pipeline-ws1
+          emptyDir: {}

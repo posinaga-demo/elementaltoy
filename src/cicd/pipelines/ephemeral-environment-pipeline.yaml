@@ -3,6 +3,8 @@ kind: Pipeline
 metadata:
   name: ephemeral-environment-pipeline
 spec:
+  workspaces:
+  - name: pipeline-ws1
   params:
   - name: message
     description: The message to print
@@ -20,11 +22,16 @@ spec:
   - name: build-and-push-frontend
     taskRef:
       name: kaniko
+    workspaces:
+    - name: source
+      workspace: pipeline-ws1
     params:
-      - name: CONTEXT
-        value: ./src/frontend/
-      - name: DOCKERFILE
-        value: ./src/frontend/Dockerfile
+    - name: IMAGE
+      value: 'gcr.io/basictoy/elementaltoy-ephemeral-frontend'
+    - name: CONTEXT
+      value: './src/frontend/'
+    - name: DOCKERFILE
+      value: './src/frontend/Dockerfile'
     resources:
       inputs:
       - name: source
@@ -32,11 +39,40 @@ spec:
       outputs:
       - name: image
         resource: docker-image
-  - name: deploy-ephemeral
+  - name: build-and-push-loadtest
+    taskRef:
+      name: kaniko
+    workspaces:
+      - name: source
+        workspace: pipeline-ws1
+    params:
+    - name: IMAGE
+      value: 'gcr.io/basictoy/elementaltoy-ephemeral-loadtest'
+    - name: CONTEXT
+      value: './src/loadtest/'
+    - name: DOCKERFILE
+      value: './src/loadtest/Dockerfile'
+    resources:
+      inputs:
+      - name: source
+        resource: git-source
+      outputs:
+      - name: image
+        resource: docker-image
+  - name: deploy-ephemeral-frontend
     taskRef:
       name: gcloud
     runAfter:
       - build-and-push-frontend
     params:
       - name: ARGS
-        value: ['run', 'deploy', 'elementaltoy-ephemeral', '--image', 'gcr.io/basictoy/elementaltoy-ephemeral', '--region', 'us-east4', '--platform', 'managed', '--port', '3000', '--allow-unauthenticated']
+        value: ['run', 'deploy', 'elementaltoy-ephemeral-frontend', '--image', 'gcr.io/basictoy/elementaltoy-ephemeral-frontend', '--region', 'us-east4', '--platform', 'managed', '--port', '3000', '--allow-unauthenticated']
+  - name: deploy-ephemeral-loadtest
+    taskRef:
+      name: gcloud
+    runAfter:
+      - build-and-push-loadtest
+    params:
+      - name: ARGS
+        value: ['run', 'deploy', 'elementaltoy-ephemeral-loadtest', '--image', 'gcr.io/basictoy/elementaltoy-ephemeral-loadtest', '--region', 'us-east4', '--platform', 'managed', '--port', '8089', '--allow-unauthenticated']
+    

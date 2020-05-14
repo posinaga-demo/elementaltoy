@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-fe
+spec:
+  steps:
+    - name: build
+      image: gcr.io/cloud-builders/docker
+      command:
+        - docker
+      args:
+        - "build -f src/basictoy2-fe/Dockerfile -t gcr.io/basictoy2:$COMMIT_SHA src/basictoy2-fe"
+    - name: push
+      image: gcr.io/cloud-builders/docker
+      command:
+        - docker
+      args:
+        - "push gcr.io/basictoy2:$COMMIT_SHA"
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-lt
+spec:
+  steps:
+    - name: build
+      image: gcr.io/cloud-builders/docker
+      command:
+        - docker
+      args:
+        - "build -f src/basictoy2-lt/Dockerfile -t gcr.io/basictoy2-lt:$COMMIT_SHA src/basictoy2-lt/"
+    - name: push
+      image: gcr.io/cloud-builders/docker
+      command:
+        - docker
+      args:
+        - "push gcr.io/basictoy2-lt:$COMMIT_SHA"

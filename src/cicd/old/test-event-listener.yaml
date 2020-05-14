@@ -1,0 +1,20 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: test-event-listener
+spec:
+  serviceAccountName: posinaga-github-gcr-5
+  # serviceType: LoadBalancer
+  triggers:
+    - name: test-event-listener-trigger
+      # interceptors:
+      #   - github:
+      #       secretRef:
+      #         secretName: foo
+      #         secretKey: bar
+      #       eventTypes:
+      #         - pull_request
+      # bindings:
+      #   - name: test-trigger-binding
+      template:
+        name: test-template

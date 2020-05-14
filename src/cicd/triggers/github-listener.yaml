@@ -1,0 +1,14 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: github-listener
+spec:
+  serviceAccountName: triggers-sa
+  triggers:
+    - name: foo-trig
+      bindings:
+        - name: pipeline-binding
+        # - name: message-binding
+      template:
+        name: ephemeral-environment-pipeline-run-template

@@ -1,0 +1,110 @@
+commands.txt
+
+kubectl port-forward $(kubectl get pod -o=name -l eventlistener=test-event-listener) 8081
+
+https://github.com/posinaga-demo/basictoy
+
+		"id": "master"
+
+		"url": "https://github.com/tektoncd/triggers.git"
+
+  http://localhost:8080 \
+
+35.236.235.7
+
+curl -X POST \
+  http://35.236.235.7 \
+  -H 'Content-Type: application/json' \
+  -H 'X-Hub-Signature: sha1=2da37dcb9404ff17b714ee7a505c384758ddeb7b' \
+  -d '{
+	"head_commit":
+	{
+		"id": "saraza"
+	},
+	"repository":
+	{
+		"url": "https://github.com/posinaga-demo/basictoy"
+	}
+}'
+
+
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/secret.yaml
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/serviceaccount.yaml
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/triggerbinding-roles/role.yaml
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/triggerbinding-roles/binding.yaml
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/triggertemplates/triggertemplate.yaml
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/triggerbindings/triggerbinding.yaml
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/triggerbindings/triggerbinding-message.yaml
+kubectl apply -f https://raw.githubusercontent.com/tektoncd/triggers/master/examples/eventlisteners/eventlistener.yaml
+
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/secret.yaml
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/serviceaccount.yaml
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/triggerbinding-roles/role.yaml
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/role-resources/triggerbinding-roles/binding.yaml
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/triggertemplates/triggertemplate.yaml
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/triggerbindings/triggerbinding.yaml
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/triggerbindings/triggerbinding-message.yaml
+wget https://raw.githubusercontent.com/tektoncd/triggers/master/examples/eventlisteners/eventlistener.yaml
+
+kubectl apply -f secret.yaml
+kubectl apply -f serviceaccount.yaml
+kubectl apply -f role.yaml
+kubectl apply -f binding.yaml
+kubectl apply -f triggertemplate.yaml
+kubectl apply -f triggerbinding.yaml
+kubectl apply -f triggerbinding-message.yaml
+kubectl apply -f eventlistener.yaml
+kubectl apply -f example-pipeline.yaml
+
+kubectl get el listener -o=jsonpath='{.status.configuration.generatedName}'
+
+
+cf315a5c9e1f 
+57c
+
+
+
+gcloud beta container node-pools update default-pool \
+ --cluster=test1 \
+ --workload-metadata-from-node=GKE_METADATA_SERVER \
+ --zone=us-east4-a
+
+
+louis-testing-project.svc.id.goog
+
+basictoy.svc.id.goog
+
+
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
+  cloudrun-admin@basictoy.iam.gserviceaccount.com
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
+  490491327578-compute@developer.gserviceaccount.com
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
+  cloudrun-orchestration@basictoy.iam.gserviceaccount.com
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
+  pablo.osinaga@gmail.com
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
+  service-490491327578@serverless-robot-prod.iam.gserviceaccount.com
+
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:basictoy.svc.id.goog[default/tekton-triggers-example-sa]" \
+  deployer@basictoy.iam.gserviceaccount.com
+
+

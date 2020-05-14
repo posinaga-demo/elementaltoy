@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: triggers-sa
+  annotations:
+    iam.gke.io/gcp-service-account: deployer@basictoy.iam.gserviceaccount.com
+secrets:
+  # - name: githubsecret
+  - name: github-auth
+  - name: gcr-docker-auth

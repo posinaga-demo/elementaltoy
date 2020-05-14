@@ -1,0 +1,42 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: ephemeral-environment-pipeline
+spec:
+  params:
+  - name: message
+    description: The message to print
+    default: This is the default message
+    type: string
+  - name: contenttype
+    description: The Content-Type of the event
+    type: string
+  resources:
+  - name: git-source
+    type: git
+  - name: docker-image
+    type: image
+  tasks:
+  - name: build-and-push-frontend
+    taskRef:
+      name: kaniko
+    params:
+      - name: CONTEXT
+        value: ./src/frontend/
+      - name: DOCKERFILE
+        value: ./src/frontend/Dockerfile
+    resources:
+      inputs:
+      - name: source
+        resource: git-source
+      outputs:
+      - name: image
+        resource: docker-image
+  - name: deploy-ephemeral
+    taskRef:
+      name: gcloud
+    runAfter:
+      - build-and-push-frontend
+    params:
+      - name: ARGS
+        value: ['run', 'deploy', 'elementaltoy-ephemeral', '--image', 'gcr.io/basictoy/elementaltoy-ephemeral', '--region', 'us-east4', '--platform', 'managed', '--port', '3000', '--allow-unauthenticated']

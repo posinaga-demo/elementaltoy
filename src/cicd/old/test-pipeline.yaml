@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: test-pipeline
+spec:
+  # params:
+  #   - name: commit_sha
+  #     type: string
+  #     description: SHA of commit in git repository
+  tasks:
+    - name: test-pipeline-buildah-task
+      taskRef:
+        name: buildah
+      # params:
+        # - name: pathToDockerFile
+        #   value: Dockerfile
+        # - name: commit_sha
+        #   value: "$(params.commit_sha)"

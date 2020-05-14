@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+    name: build-fe-task-run
+spec:
+    taskRef:
+        name: build-fe
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+    name: build-lt-task-run
+spec:
+    taskRef:
+        name: build-lt

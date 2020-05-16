@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: tekton-triggers-example-binding
+  name: triggers-role-sa-binding
 subjects:
 - kind: ServiceAccount
   name: triggers-sa

@@ -66,7 +66,7 @@ gcloud beta container node-pools update default-pool \
 
 gcloud beta container node-pools update default-pool \
  --cluster=test1 \
- --workload-metadata-from-node=GKE_METADATA \
+ --workload-metadata-from-node=EXPOSED \
  --zone=us-east4-a
 
 
